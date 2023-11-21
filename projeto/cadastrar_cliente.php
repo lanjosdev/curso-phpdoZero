@@ -20,7 +20,7 @@
 
     <h1>Cadastrar Cliente</h1>
 
-    <a href="">Voltar para a lista de Clientes</a>
+    <a href="">Voltar para a lista de Clientes</a> <!-- href="clientes.php"-->
     <br><br><br>
 
     <form action="" method="POST">
@@ -37,7 +37,7 @@
         <br><br>
 
         <label for="nasc">Data de Nascimento:</label>
-        <input type="text" placeholder="dd/mm/aaaa" id="nasc" name="nascimento" value="<?=$nascimento?>" > *
+        <input type="date" placeholder="dd/mm/aaaa" id="nasc" name="nascimento" value="<?=$nascimento?>" > *
         <br><br>
 
 
@@ -46,14 +46,18 @@
 
     <?php 
     $erro = false;
-    if(count($_POST) > 0) {
-        // echo "$nome <br> $email <br> $telefone <br> $nascimento";
+    if(count($_POST) > 0) { // entra nesse if apos o envio post (clique no btn enviar)
+
+        // Validação de inputs
         if(!empty($nascimento)) {
-            $pedacos = explode('/', $nascimento); // 13/01/1995 = 13, 01, 1995 (vira array)
-            if(count($pedacos) == 3) {
-                $nascimento = implode('-', array_reverse($pedacos)); // 1995-01-13
-            } else {
-                $erro = "A data de nascimento deve seguir o padrão dia/mes/ano";
+            if(strcspn($nascimento, "-") != 4) {
+                $pedacos = explode('/', $nascimento); // 13/01/1995 = 13, 01, 1995 (vira array)
+                
+                if(count($pedacos) == 3) {
+                    $nascimento = implode('-', array_reverse($pedacos)); // 1995-01-13
+                } else {
+                    $erro = "A data de nascimento deve seguir o padrão dd/mm/aaaa";
+                }
             }
         } else {
             $erro = "Preencha a data de nascimento";
@@ -62,12 +66,14 @@
         if(!empty($telefone)) {
             $telefone = sodeixa_numeros($telefone);
             if(strlen($telefone) != 11) {
-                $erro = "O telefone deve ser preenchido no padrão 1198888-8888";
+                $erro = "O telefone deve ser preenchido no padrão (11)98888-8888";
             }
         }
 
         if(empty($email)) {
             $erro = "Preencha o email";
+        } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $erro = "Preencha um email válido!";
         }
 
         if(empty($nome)) {
@@ -77,6 +83,8 @@
 
         if($erro) {
             echo "<p style='color: red'><b>ERRO: $erro</b></p>";
+        } else {
+            // Envio para o Banco de Dados:
         }
     }
     ?>
