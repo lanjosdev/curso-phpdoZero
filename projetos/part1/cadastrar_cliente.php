@@ -20,7 +20,7 @@
 
     <h1>Cadastrar Cliente</h1>
 
-    <a href="">Voltar para a lista de Clientes</a> <!-- href="clientes.php"-->
+    <a href="clientes.php">Voltar para a lista de Clientes</a>
     <br><br><br>
 
     <form action="" method="POST">
@@ -45,8 +45,9 @@
     </form>
 
     <?php 
-    $erro = false;
-    if(count($_POST) > 0) { // entra nesse if apos o envio post (clique no btn enviar)
+    if(count($_POST) > 0) { // entra nesse if apos o submit (clique no btn enviar, que alimenta a array $_POST)
+        include('connection.php'); //Inclui o script de conexao com BD
+        $erro = false;        
 
         // Validação de inputs
         if(!empty($nascimento)) {
@@ -54,7 +55,7 @@
                 $pedacos = explode('/', $nascimento); // 13/01/1995 = 13, 01, 1995 (vira array)
                 
                 if(count($pedacos) == 3) {
-                    $nascimento = implode('-', array_reverse($pedacos)); // 1995-01-13
+                    $nascimento = implode('-', array_reverse($pedacos)); // 1995-01-13 exemplo
                 } else {
                     $erro = "A data de nascimento deve seguir o padrão dd/mm/aaaa";
                 }
@@ -78,13 +79,20 @@
 
         if(empty($nome)) {
             $erro = "Preencha o nome";
+        } else if(strlen($nome) < 3) {
+            $erro = "O nome deve conter a partir de 3 caracteres";
         }
 
 
         if($erro) {
             echo "<p style='color: red'><b>ERRO: $erro</b></p>";
         } else {
-            // Envio para o Banco de Dados:
+            // Envio para o Banco de Dados (CREATE registro):
+            $sqlcode = "INSERT INTO clientes (nome, email, telefone, nascimento, data_cadastro) VALUES ('$nome', '$email', '$telefone', '$nascimento', NOW())";
+
+            $sucesso = $mysqli->query($sqlcode) or die($mysqli->error);
+            echo "<p style='color: green'><b>Cliente cadastrado com sucesso!!!</b></p>";
+            unset($_POST); //Limpa o formulario
         }
     }
     ?>
