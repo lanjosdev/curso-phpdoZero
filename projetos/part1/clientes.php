@@ -16,7 +16,8 @@
     ?>
 
     <h1>Lista de Clientes</h1>
-    <p>Estes são os clientes cadastrados no seu sistema:</p>
+    <p style="display: inline-block;">Estes são os clientes cadastrados no seu sistema:</p>
+    <a href="cadastrar_cliente.php" style="float: right;">ADD CLIENTE</a>
 
     <table border="1" cellpadding="10">
         <thead>
