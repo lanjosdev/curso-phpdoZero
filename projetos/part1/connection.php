@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db = 'crud_clientes';
 $user = 'root';
-$pass = 'Ennad1995';
+$pass = '';
 
 
 $mysqli = new mysqli($host, $user, $pass, $db); // Comando para conectar com BD MySQL
