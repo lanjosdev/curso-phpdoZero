@@ -9,11 +9,11 @@ import { formatarTel, formatarData, formatarCadastro } from "../../utils/format"
 // Estilo:
 
 export default function Clientes() {
-  document.title = `Lista de Clientes`;
   const [loadingClientes, setLoadingClientes] = useState(true);
   const [clientes, setClientes] = useState([]);
 
-  
+  document.title = `Lista de Clientes`;
+
   useEffect(()=> {
     async function carregaClientes() {     
       try {
@@ -36,7 +36,7 @@ export default function Clientes() {
     <main className="Container-clientes">
         <h1>Lista de Clientes</h1>
         <p style={{display: 'inline-block'}}>Estes são os clientes cadastrados no seu sistema:</p>
-        <Link to='/cadastro' style={{float: 'right'}}>ADD CLIENTE</Link>
+        <Link to='/registra' style={{float: 'right'}}>ADD CLIENTE</Link>
 
         {loadingClientes ? (
             <p>Buscando clientes...</p>

@@ -1,5 +1,5 @@
 // Funcionalidades / Libs:
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { CLIENTE_ADD } from "../../API/clientesDB";
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,8 @@ export default function Cadastro() {
   const emailRef = useRef('');
   const telRef = useRef('');
   const nascRef = useRef('');
-  // const [] = useState();
+  
+  const [sucesso, setSucesso] = useState(false);
   
 
   async function handleSubmitRegister(e) {
@@ -37,10 +38,13 @@ export default function Cadastro() {
         console.log(response);
         
         console.log('SUCESS CREATE REGISTER');
-        // setClientes(response);
-        const formCadastro = document.querySelector('#form-cadastro');
-        formCadastro.reset();
-
+        // const formCadastro = document.querySelector('#form-cadastro');
+        // formCadastro.reset();
+        nomeRef.current.value = '';
+        emailRef.current.value = '';
+        telRef.current.value = '';
+        nascRef.current.value = '';
+        setSucesso(true);
       } catch(erro) {
         console.log('Deu erro');
         console.log(erro);
@@ -65,24 +69,26 @@ export default function Cadastro() {
 
       <form onSubmit={handleSubmitRegister} id="form-cadastro">
         <label htmlFor="name">Nome: </label>
-        <input type="text" id="name" name="nome" ref={nomeRef} /> *
+        <input type="text" id="name" ref={nomeRef} autoComplete="on" required /> *
         <br/><br/>
 
         <label htmlFor="mail">E-mail: </label>
-        <input type="email" id="mail" name="email" ref={emailRef}  /> *
+        <input type="email" id="mail" ref={emailRef} required /> *
         <br/><br/>
 
         <label htmlFor="tel">Telefone: </label>
-        <input type="tel" placeholder="(11)98888-8888" id="tel" name="telefone" ref={telRef}  />
+        <input type="tel" placeholder="(11)98888-8888" id="tel" ref={telRef} autoComplete="on" />
         <br/><br/>
 
         <label htmlFor="nasc">Data de Nascimento: </label>
-        <input type="date" placeholder="dd/mm/aaaa" id="nasc" name="nascimento" ref={nascRef}  /> *
+        <input type="date" placeholder="dd/mm/aaaa" id="nasc" ref={nascRef} required /> *
         <br/><br/>
 
 
         <button type="submit">Salvar Cliente</button>
       </form>
+
+      {sucesso ? <p style={{color: 'green'}}><b>Cliente cadastrado com sucesso!!!</b></p> : null}
       
     </main>
   )

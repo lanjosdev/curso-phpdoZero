@@ -5,9 +5,9 @@ import axios from "axios";
 export const API_URL = api.api_url;
 
 
-// End points de CLIENTES
+// END POINTS DE CLIENTES
 
-// Lista todos os Clientes cadastrados (READ):
+// Busca todos os Clientes cadastrados (READ):
 export async function CLIENTES_GET_ALL() {
     const response = await axios.get(API_URL + "clientes.php")
 
@@ -18,7 +18,7 @@ export async function CLIENTES_GET_ALL() {
 
 // Cadastar Cliente (CREATE):
 export async function CLIENTE_ADD(formData) {
-    axios({
+    await axios({
         method: 'post',
         url: API_URL + 'cadastrar_cliente.php',
         data: formData,
@@ -27,4 +27,14 @@ export async function CLIENTE_ADD(formData) {
     // const resul = response.data; // puxa a array de midias da API
     // console.log(resul);
     // return resul;
+}
+
+// Deletar Cliente (DELETE):
+export async function MEDIA_DELETE(id, token) {
+    const response = await axios.delete(API_URL + `api/media/${id}`, { headers: { Authorization: "Bearer " + token } })
+
+    console.log('RESPOTA DA FUNÇÃO DELETE:')
+    console.log(response);
+    // const mediaDeletada = response.data.data;
+    // return mediaDeletada;
 }
