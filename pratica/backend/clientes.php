@@ -21,8 +21,26 @@ function readAllClientes($con_sqli) {
     echo json_encode($ranking_data);
 }
 
+function readClienteId($con_sqli, $idCliente) {
+    $sql_code = "SELECT * FROM clientes WHERE id=$idCliente";
+    $query_read = $con_sqli->query($sql_code);
+
+    $cliente_data = $query_read->fetch_assoc();
+    if($cliente_data) {
+        echo json_encode($cliente_data);
+    } else {
+        http_response_code(404);
+    }
+}
+
+
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
-    readAllClientes($con_sqli);
+    $idCliente = $_GET['id'] ?? null;
+    if($idCliente) {
+        readClienteId($con_sqli, $idCliente);
+    } else {
+        readAllClientes($con_sqli);
+    }
 } else {
     // Se a requisição não for do tipo GET, retorna um erro
     http_response_code(405); // Método não permitido

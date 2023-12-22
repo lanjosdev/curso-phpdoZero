@@ -15,6 +15,14 @@ export async function CLIENTES_GET_ALL() {
     // console.log(clientesAll);
     return clientesAll;
 }
+// Busca Cliente pelo ID (READ):
+export async function CLIENTE_GET_ID(id) {
+    const response = await axios.get(API_URL + `clientes.php?id=${id}`);
+
+    const cliente = response.data; // puxa a array de midias da API
+    console.log(cliente);
+    return cliente;
+}
 
 // Cadastar Cliente (CREATE):
 export async function CLIENTE_ADD(formData) {
@@ -30,10 +38,10 @@ export async function CLIENTE_ADD(formData) {
 }
 
 // Deletar Cliente (DELETE):
-export async function MEDIA_DELETE(id, token) {
-    const response = await axios.delete(API_URL + `api/media/${id}`, { headers: { Authorization: "Bearer " + token } })
+export async function CLIENTE_DELETE(id) {
+    const response = await axios.get(API_URL + `deletar_cliente.php?id=${id}`);
 
-    console.log('RESPOTA DA FUNÇÃO DELETE:')
+    console.log('RESPOTA DA FUNÇÃO DELETE:');
     console.log(response);
     // const mediaDeletada = response.data.data;
     // return mediaDeletada;
