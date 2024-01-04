@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 } else {
     // Se a requisição não for do tipo GET, retorna um erro
     http_response_code(405); // Método não permitido
-    echo json_encode(['erro' => 'Método não permitido']);
+    echo json_encode(['erro' => 'Método não permitido']); // retorna um objeto
     // http_response_code(400); // Bad Request
     // echo "Erro!";
 }

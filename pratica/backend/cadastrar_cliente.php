@@ -12,7 +12,6 @@ function createCliente($con_sqli) {
     $sql_code = "INSERT INTO clientes (nome, email, telefone, nascimento, data_cadastro) VALUES ('$nome', '$email', '$telefone', '$nascimento', NOW())";
 
     $query_create = $con_sqli->query($sql_code) or die($con_sqli->error);
-    // unset($_POST); //Limpa o formulario
     if(!$query_create) {
         http_response_code(404);
     } 

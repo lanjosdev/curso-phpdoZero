@@ -9,7 +9,7 @@ export const API_URL = api.api_url;
 
 // Busca todos os Clientes cadastrados (READ):
 export async function CLIENTES_GET_ALL() {
-    const response = await axios.get(API_URL + "clientes.php")
+    const response = await axios.get(API_URL + "clientes.php");
 
     const clientesAll = response.data; // puxa a array de midias da API
     // console.log(clientesAll);
@@ -20,7 +20,7 @@ export async function CLIENTE_GET_ID(id) {
     const response = await axios.get(API_URL + `clientes.php?id=${id}`);
 
     const cliente = response.data; // puxa a array de midias da API
-    console.log(cliente);
+    // console.log(cliente);
     return cliente;
 }
 
@@ -35,6 +35,18 @@ export async function CLIENTE_ADD(formData) {
     // const resul = response.data; // puxa a array de midias da API
     // console.log(resul);
     // return resul;
+}
+
+// Editar Cliente (UPDATE):
+export async function CLIENTE_EDIT(formData) {
+    const response = await axios({
+        method: 'post',
+        url: API_URL + 'editar_cliente.php',
+        data: formData, // ID já está no formData
+    });
+
+    console.log('RESPOTA DA FUNÇÃO EDITAR:');
+    console.log(response);
 }
 
 // Deletar Cliente (DELETE):
