@@ -1,5 +1,5 @@
 <?php 
-require('connection.php');
+require('index.php');
 
 function sodeixa_numeros($str) {
     return preg_replace("/[^0-9]/", "", $str);

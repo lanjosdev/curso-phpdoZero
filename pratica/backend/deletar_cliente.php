@@ -1,5 +1,5 @@
 <?php
-require('connection.php');
+require('index.php');
 
 $id = intval($_GET['id']) ?? null; //força ser inteiro
 

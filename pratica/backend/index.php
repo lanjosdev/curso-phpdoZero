@@ -1,9 +1,9 @@
 <?php 
 header('Access-Control-Allow-Origin: *');
-$host = 'localhost';
-$db = 'crud_clientes';
-$user = 'root';
-$pass = '';
+$host = 'database-1.crocuoiuc11a.us-east-2.rds.amazonaws.com';
+$db = 'testeDB';
+$user = 'admin';
+$pass = 'QMxQP2BjATmfb3skNAXs';
 
 $con_sqli = new mysqli($host, $user, $pass, $db); // Comando para conectar com BD MySQL
 

@@ -1,5 +1,5 @@
 <?php 
-require('connection.php');
+require('index.php');
 
 function createCliente($con_sqli) {
     // Capturando os dados do Formulario

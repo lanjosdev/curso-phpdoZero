@@ -1,5 +1,5 @@
 <?php 
-require('connection.php');
+require('index.php');
 
 function readAllClientes($con_sqli) {
     $sql_code = "SELECT * FROM clientes";
